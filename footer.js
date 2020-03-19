@@ -14,8 +14,11 @@ export default class Footer extends Component{
           </Picker>
         </View>
         <View style={myStyles.btnContainer}>
-          <TouchableHighlight onPress={this.props.onPress} style={myStyles.btn}>
+          <TouchableHighlight onPress={this.props.onPress} style={myStyles.btnRefresh}>
             <Text style={{color: '#f1f1f1'}}>refresh</Text>
+          </TouchableHighlight>
+          <TouchableHighlight onPress={this.props.onPressUndo} style={myStyles.btnUndo}>
+            <Text style={{color: '#f1f1f1'}}>undo</Text>
           </TouchableHighlight>
         </View>
       </View>
@@ -47,11 +50,18 @@ const myStyles = {
     flex: 1,
     height: '100%',
     width: '100%',
-    justifyContent: 'center',
+    justifyContent: 'space-around',
     alignItems: 'center',
+    flexDirection: 'row',
   },
-  btn: {
+  btnRefresh: {
     backgroundColor: '#c77180',
     padding: 10,
+    marginRight: 40,
+  },
+  btnUndo: {
+    backgroundColor: '#c77180',
+    padding: 10,
+    marginRight: 20,
   },
 }

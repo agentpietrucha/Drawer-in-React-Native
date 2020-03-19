@@ -56,6 +56,12 @@ export default class App extends Component {
       arr: [],
     })
   }
+  handleOnPressUndo = (e) => {
+    this.state.arr.pop();
+    this.setState({
+      arr: this.state.arr
+    })
+  }
   handleSizeSelection = (e) => {
     let sizeTmp;
     switch(Number(e)){
@@ -84,7 +90,11 @@ export default class App extends Component {
             <View>{this.state.arr}</View>
         </View>
         <View style={myStyles.footer}>
-          <Footer size={this.state.size} onValueChange={this.handleSizeSelection} onPress={this.handleOnPressRefresh}/>
+          <Footer 
+          size={this.state.size}
+          onValueChange={this.handleSizeSelection}
+          onPress={this.handleOnPressRefresh}
+          onPressUndo={this.handleOnPressUndo}/>
         </View>
     </View>
     );
