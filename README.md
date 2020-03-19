@@ -1,4 +1,4 @@
-# Drawer-in-React-Native
+# Drawer in React Native
 
 Simple React Native application, which simulates drawboard. You cen select size of the pen as well as refresh the board to create a new drawing
 
