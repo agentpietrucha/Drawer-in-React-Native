@@ -7,7 +7,7 @@ export default class Footer extends Component{
       <View style={myStyles.container}>
         <View style={myStyles.size_picker_container}>
           <Text>Pick size:</Text>
-          <Picker selectedValue={this.props.size} itemStyle={myStyles.picker} onValueChange={this.props.onValueChange}>
+          <Picker mode='dropdown' selectedValue={this.props.size} itemStyle={myStyles.picker} style={myStyles.picker} onValueChange={this.props.onValueChange}>
             <Picker.Item label='small' value={10}/>
             <Picker.Item label='medium' value={20}/>
             <Picker.Item label='big' value={30}/>
