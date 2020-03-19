@@ -4,4 +4,4 @@ Simple React Native application, which simulates drawboard. You cen select size 
 
 Uses only default react library
 
-IMG_2DCBBCB5B850-1.jpeg
+![Alt text](https://github.com/agentpietrucha/Drawer-in-React-Native/blob/master/screenshot/IMG_2DCBBCB5B850-1.jpeg?raw=true)
