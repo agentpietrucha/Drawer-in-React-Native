@@ -20,6 +20,8 @@ const myStyles = {
   },
   titleText: {
     fontSize: 25,
+    fontWeight: 'bold',
+    letterSpacing: 1.5,
   },
   sawicki: {
     fontSize: 10,

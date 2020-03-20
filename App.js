@@ -3,6 +3,9 @@ import { Text, View, PanResponder, Button, Dimensions, TouchableHighlight, Picke
 import Footer from './footer';
 import Title from './title';
 import { Dot } from './dot';
+import Splash from './splash';
+import { FadeIn } from './fadein';
+import { FadeOut } from './fadeout';
 
 const DOT_SIZE_SMALL = 10;
 const DOT_SIZE_MEDIUM = 20;
@@ -11,6 +14,8 @@ const DOT_COLOR = 'aliceblue';
 const DOT_HIGHLIGHT_COLOR = '#9dbfdc';
 const DEVICE_HEIGHT = Dimensions.get('window').height;
 const equalize = DEVICE_HEIGHT * 0.1;
+const SPLASH_FADE_OUT_DURATION = 2000;
+const MAIN_FADE_IN_DURATION = 500;
 
 export default class App extends Component {
 
@@ -23,6 +28,7 @@ export default class App extends Component {
       yStatic: 0,
       arr: [],
       size: DOT_SIZE_SMALL,
+      splash: true,
     };
     this._panResponder = PanResponder.create({
       onStartShouldSetPanResponder: (evt, gestureState) => true,
@@ -79,25 +85,51 @@ export default class App extends Component {
       size: sizeTmp,
     });
   }
+  wait = async() => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve('result');
+      }, SPLASH_FADE_OUT_DURATION)
+    });
+  }
+  async componentDidMount(){
+    let data = await this.wait();
+    if(data !== null){
+      this.setState({
+        splash: false,
+      });
+    }
+  }
   render() {
-    return (
-      <View style={myStyles.container}>
-        <StatusBar barStyle='dark-content'/>
-        <Title/>
-        <View style={myStyles.playGround} {...this._panResponder.panHandlers} ref={dot => {
-          this.dot = dot;
-        }}>
-            <View>{this.state.arr}</View>
-        </View>
-        <View style={myStyles.footer}>
-          <Footer 
-          size={this.state.size}
-          onValueChange={this.handleSizeSelection}
-          onPress={this.handleOnPressRefresh}
-          onPressUndo={this.handleOnPressUndo}/>
-        </View>
-    </View>
-    );
+    if(this.state.splash === true){
+      return(
+        <FadeOut duration={SPLASH_FADE_OUT_DURATION + 750}>
+          <Splash/>
+        </FadeOut>
+      );
+    } else {
+      return (
+        <FadeIn duration={MAIN_FADE_IN_DURATION}>
+          <View style={myStyles.container}>
+            <StatusBar barStyle='dark-content'/>
+            <Title/>
+            <View style={myStyles.playGround} {...this._panResponder.panHandlers} ref={dot => {
+              this.dot = dot;
+            }}>
+                <View>{this.state.arr}</View>
+            </View>
+            <View style={myStyles.footer}>
+              <Footer 
+              size={this.state.size}
+              onValueChange={this.handleSizeSelection}
+              onPress={this.handleOnPressRefresh}
+              onPressUndo={this.handleOnPressUndo}/>
+            </View>
+          </View>
+        </FadeIn>
+      );
+
+    }
   }
 }
 
